@@ -31,7 +31,7 @@ def main():
 
     # 2. Setup Model - USING OFFLINE DETECTION
     # Force CPU to avoid MPS issues
-    device = torch.device('cpu')
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     data_tensor = data_tensor.to(device)
     
     # OFFLINE DETECTION - processes entire dataset at once for optimal segmentation
@@ -40,7 +40,7 @@ def main():
     prior_func = partial(const_prior, p=prior_prob)
     
     # Likelihood: Student's T (robust to outliers)
-    likelihood = StudentT()
+    likelihood = StudentT(device=device)
 
     # 3. Run Offline Detection
     print(f"Running OFFLINE changepoint detection on {device}...")
