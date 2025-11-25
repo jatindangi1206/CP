@@ -1,0 +1,6 @@
+# Minimal requirements for bayesian-changepoint-detection
+# Only what's needed for CSV changepoint detection
+
+torch>=2.0.0
+numpy>=1.21.0
+matplotlib>=3.5.0
